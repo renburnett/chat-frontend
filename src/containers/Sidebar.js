@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react'
 class Sidebar extends PureComponent {
   render () {
     return (
-      <div> Hello!!!</div>
+      <div className='mt-5' > Hello!!!</div>
     )
   }
 }
