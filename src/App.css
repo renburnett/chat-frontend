@@ -2,21 +2,32 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
+.navbar {
+  background: aquamarine;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 10vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.chat-window {
+  height: 100vh;
+  border: black;
+  border-style: solid;
+  border-width: 2px;
 }
 
-.App-link {
-  color: #09d3ac;
+.sidebar {
+  height: 100vh;
+  border:black;
+  border-style: solid;
+  border-width: 2px;
+}
+
+.message-form {
+  position: fixed; 
+  bottom: 0;
+  border:black;
+  border-style: solid;
+  border-width: 2px;
+}
+
+#message-input {
+  width: 100vh;
 }

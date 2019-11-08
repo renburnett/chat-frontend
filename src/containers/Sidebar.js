@@ -12,7 +12,7 @@ class Sidebar extends PureComponent {
 
   render () {
     return (
-      <div className='mt-5'> {this.displayUsers(this.props.users)}</div>
+      <div className='col sidebar'> {this.displayUsers(this.props.users)}</div>
     )
   }
 }

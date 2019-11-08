@@ -28,13 +28,14 @@ class App extends Component {
 
   render(){
     return (
-      <div className="App">
-        <header className="App-header">
-        </header>
+      <div className="App container" >
         <Navbar />
-        <Sidebar users={this.state.users} />
+        
         <Login />
-        <ChatWindow />
+        <div className="row">
+          <ChatWindow />
+          <Sidebar users={this.state.users} />
+        </div>
       </div>
     )
   }
