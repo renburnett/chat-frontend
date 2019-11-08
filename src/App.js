@@ -11,7 +11,16 @@ import ChatWindow from './containers/ChatWindow'
 class App extends Component {
 
   state = {
-    users: []
+    users: [],
+    loggedIn: false,
+  }
+
+  logIn = (event) => {
+    event.preventDefault();
+    console.log("clicked login!")
+    this.setState({
+      loggedIn: !this.state.loggedIn
+    })
   }
 
   getUsers = () => {
@@ -30,8 +39,7 @@ class App extends Component {
     return (
       <div className="App container" >
         <Navbar />
-        
-        <Login />
+        <Login handleLogIn={this.logIn} />
         <div className="row">
           <ChatWindow />
           <Sidebar users={this.state.users} />
