@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import './App.css'
 import Sidebar from './containers/Sidebar'
 import Navbar from './containers/Navbar'
@@ -38,12 +39,14 @@ class App extends Component {
   render(){
     return (
       <div className="App container" >
-        <Navbar />
-        <Login handleLogIn={this.logIn} />
-        <div className="row">
-          <ChatWindow loggedIn={this.state.loggedIn} />
-          <Sidebar users={this.state.users} loggedIn={this.state.loggedIn} />
-        </div>
+        <Router>
+          <Navbar />
+          <Route exact path='/login' render={props => <Login {...props} handleLogIn={this.logIn} />} />
+          <div className="row">
+            <Route path='/' render={props => <ChatWindow {...props} loggedIn={this.state.loggedIn} />} />
+            <Route path='/' renter={props => <Sidebar {...props} loggedIn={this.state.loggedIn} users={this.state.users} />} />
+          </div>
+        </Router>
       </div>
     )
   }
