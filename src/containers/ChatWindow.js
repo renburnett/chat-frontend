@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import MessageForm from './MessageForm'
+import PrivacyHOC from '../HOC/PrivacyHOC'
 
 class ChatWindow extends PureComponent {
   render () {
@@ -12,4 +13,4 @@ class ChatWindow extends PureComponent {
   }
 }
 
-export default ChatWindow
+export default PrivacyHOC(ChatWindow)
