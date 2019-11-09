@@ -41,8 +41,8 @@ class App extends Component {
         <Navbar />
         <Login handleLogIn={this.logIn} />
         <div className="row">
-          <ChatWindow />
-          <Sidebar users={this.state.users} />
+          <ChatWindow loggedIn={this.state.loggedIn} />
+          <Sidebar users={this.state.users} loggedIn={this.state.loggedIn} />
         </div>
       </div>
     )

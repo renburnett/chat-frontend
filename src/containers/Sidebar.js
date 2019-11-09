@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import User from '../components/User'
+import PrivacyHOC from '../HOC/PrivacyHOC'
 
 class Sidebar extends PureComponent {
 
@@ -17,4 +18,4 @@ class Sidebar extends PureComponent {
   }
 }
 
-export default Sidebar
+export default PrivacyHOC(Sidebar)
