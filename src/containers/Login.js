@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react'
-// import LoginAlert from '../components/LoginAlert'
+import LoginAlert from '../components/LoginAlert'
 
 class Login extends PureComponent {
   state = {
     username: '',
-    email: ''
+    email: '',
+    loginError: false
   }
 
   handleTyping = (e) => {
@@ -20,7 +21,7 @@ class Login extends PureComponent {
           this.props.addNewUser(newUser)
           this.props.handleLogIn(newUser)
         } else {
-          this.errorLoggingIn(true)
+          this.errorLoggingIn()
         }
       })
     } else {
@@ -42,28 +43,33 @@ class Login extends PureComponent {
     }).then(resp => resp.json())
   }
 
-  errorLoggingIn = (errorPresent=false) => {
-    console.log('checking for errors with logging in', errorPresent)
-    if (errorPresent) {
-      console.log('There was an error. Unable to add new user to database.')
-    } else {
-      console.log('No errors :)')
-    }
+  errorLoggingIn = () => {
+    this.setState({
+      loginError: true
+    })
+    // console.log('checking for errors with logging in', errorPresent)
+    // if (errorPresent) {
+    //   console.log('There was an error. Unable to add new user to database.')
+    //   return <LoginAlert />
+    // } else {
+    //   console.log('No errors :)')
+    // }
   }
 
   render () {
     return (
       <>
-        {this.errorLoggingIn()}
+        {/* {this.errorLoggingIn()} */}
+        {this.state.loginError ? <LoginAlert /> : null}
         <div className='card bg-light mt-3 mb-3 shadow'>
           <div className='card-header'>
             <h3>Welcome to Chat!</h3> 
-            <h6>Please login</h6>
+            <h6>Please login or sign up</h6>
           </div>
           <div className='card-body'>
             <form onSubmit={this.userLogin}>
               <div className='form-group form-row'>
-                <label htmlFor='username' className='col-sm-3 col-form-label-sm'>Your Username</label>
+                <label htmlFor='username' className='col-sm-3 col-form-label-sm'>Username</label>
                 <div className='col'>
                   <input 
                     type='text' 
@@ -76,7 +82,7 @@ class Login extends PureComponent {
                 </div>
               </div>
               <div className='fom-group form-row'>
-                <label htmlFor='email' className='col-sm-3 col-form-label-sm'>Your Email</label>
+                <label htmlFor='email' className='col-sm-3 col-form-label-sm'>Email</label>
                 <div className='col'>
                   <input 
                     type='text' 
