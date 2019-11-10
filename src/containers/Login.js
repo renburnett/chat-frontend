@@ -37,8 +37,8 @@ class Login extends PureComponent {
         Accept: 'application/json'
       },
       body: JSON.stringify({
-        name: this.state.username,
-        email: this.state.email
+        name: this.state.username.toLowerCase(),
+        email: this.state.email.toLowerCase()
       })
     }).then(resp => resp.json())
   }
