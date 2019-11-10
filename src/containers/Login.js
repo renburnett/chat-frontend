@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 // import LoginAlert from '../components/LoginAlert'
+
 class Login extends PureComponent {
   state = {
     username: '',
@@ -17,7 +18,7 @@ class Login extends PureComponent {
       this.createUser().then(newUser => {
         if (newUser.id) {
           this.props.addNewUser(newUser)
-          this.props.handleLogin(newUser)
+          this.props.handleLogIn(newUser)
         } else {
           this.errorLoggingIn(true)
         }
@@ -28,7 +29,6 @@ class Login extends PureComponent {
   }
 
   createUser = () => {
-    console.log('creating user:', this.state.username, this.state.email)
     return fetch('http://localhost:3000/users', {
       method: 'POST',
       headers: {
@@ -42,15 +42,12 @@ class Login extends PureComponent {
     }).then(resp => resp.json())
   }
 
-  errorLoggingIn = (errorPresent) => {
+  errorLoggingIn = (errorPresent=false) => {
+    console.log('checking for errors with logging in', errorPresent)
     if (errorPresent) {
       console.log('There was an error. Unable to add new user to database.')
-      return (
-        <div className='alert alert-danger mt-3 shadow' role='alert'>
-          <p>Unable to login or add new user. Please double check your login information.</p>
-        </div>
-      )
-    //   return <LoginAlert />
+    } else {
+      console.log('No errors :)')
     }
   }
 
@@ -58,7 +55,7 @@ class Login extends PureComponent {
     return (
       <>
         {this.errorLoggingIn()}
-        <div className='card bg-light mt-3 shadow'>
+        <div className='card bg-light mt-3 mb-3 shadow'>
           <div className='card-header'>
             <h3>Welcome to Chat!</h3> 
             <h6>Please login</h6>

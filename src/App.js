@@ -7,8 +7,6 @@ import Navbar from './containers/Navbar'
 import Login from './containers/Login'
 import ChatWindow from './containers/ChatWindow'
 
-
-
 class App extends Component {
 
   state = {
@@ -50,7 +48,7 @@ class App extends Component {
           <Route exact path='/login' render={props => <Login {...props} handleLogIn={this.logIn} users={this.state.users} addNewUser={this.addNewUser} />} />
           <div className="row">
             <Route path='/' render={props => <ChatWindow {...props} loggedIn={this.state.loggedIn} />} />
-            <Route path='/' renter={props => <Sidebar {...props} loggedIn={this.state.loggedIn} users={this.state.users} />} />
+            <Route path='/' render={props => <Sidebar {...props} loggedIn={this.state.loggedIn} users={this.state.users} />} />
           </div>
         </Router>
       </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const LoginAlert = (props) => {
+const LoginAlert = () => {
   return (
     <div className='alert alert-danger mt-3 shadow' role='alert'>
       <p>Unable to login or add new user. Please double check your login information.</p>
