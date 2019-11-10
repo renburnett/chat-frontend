@@ -14,13 +14,13 @@ class App extends Component {
   state = {
     users: [],
     loggedIn: false,
+    loggedInUser: {}
   }
 
-  logIn = (event) => {
-    event.preventDefault();
-    console.log("clicked login!")
+  logIn = (user) => {
     this.setState({
-      loggedIn: !this.state.loggedIn
+      loggedIn: true,
+      loggedInUser: user
     })
   }
 
@@ -36,12 +36,18 @@ class App extends Component {
     this.getUsers()
   }
 
+  addNewUser = (newUser) => {
+    this.setState(prevState => {
+      return { users: [...prevState.users, newUser] }
+    })
+  }
+
   render(){
     return (
       <div className="App container" >
         <Router>
           <Navbar />
-          <Route exact path='/login' render={props => <Login {...props} handleLogIn={this.logIn} />} />
+          <Route exact path='/login' render={props => <Login {...props} handleLogIn={this.logIn} users={this.state.users} addNewUser={this.addNewUser} />} />
           <div className="row">
             <Route path='/' render={props => <ChatWindow {...props} loggedIn={this.state.loggedIn} />} />
             <Route path='/' renter={props => <Sidebar {...props} loggedIn={this.state.loggedIn} users={this.state.users} />} />

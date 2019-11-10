@@ -1,24 +1,80 @@
 import React, { PureComponent } from 'react'
-
 class Login extends PureComponent {
+  state = {
+    username: '',
+    email: ''
+  }
+
+  handleTyping = (e) => {
+    this.setState({ [e.target.id]: e.target.value })
+  }
+
+  userLogin = (e) => {
+    e.preventDefault()
+    let currentUser = this.props.users.find(user => user.email === this.state.email && user.name === this.state.username)
+    if (!currentUser) {
+      this.createUser()
+    } else {
+      this.props.handleLogIn(currentUser)
+    }
+  }
+
+  createUser = () => {
+    console.log('creating user:', this.state.username, this.state.email)
+    fetch('http://localhost:3000/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({
+        name: this.state.username,
+        email: this.state.email
+      })
+    }).then(resp => resp.json())
+    .then(newUser => {
+      if (newUser.id) {
+        this.props.addNewUser(newUser)
+        this.props.handleLogin(newUser)
+      } else {
+        console.log('Unable to add new user to database.')
+      }
+    })
+  }
+
   render () {
     return (
       <div className='card bg-light mt-3 shadow'>
         <div className='card-header'>
-          <h4>Welcome to Chat! Please login:</h4>
+          <h3>Welcome to Chat!</h3> 
+          <h6>Please login</h6>
         </div>
         <div className='card-body'>
-          <form onSubmit={this.props.handleLogIn}>
+          <form onSubmit={this.userLogin}>
             <div className='form-group form-row'>
-              <label for='username' className='col-sm-3 col-form-label-sm '>Your Username</label>
+              <label htmlFor='username' className='col-sm-3 col-form-label-sm'>Your Username</label>
               <div className='col'>
-                <input type='text' placeholder='enter your username' id='username' className='form-control shadow-sm' required />
+                <input 
+                  type='text' 
+                  placeholder='enter your username' 
+                  id='username' 
+                  value={this.state.username}
+                  className='form-control shadow-sm' 
+                  required 
+                  onChange={this.handleTyping}/>
               </div>
             </div>
             <div className='fom-group form-row'>
-              <label for='email' className='col-sm-3 col-form-label-sm'>Your Email</label>
+              <label htmlFor='email' className='col-sm-3 col-form-label-sm'>Your Email</label>
               <div className='col'>
-                <input type='text' placeholder='enter your email' id='email' className='form-control mb-3 shadow-sm' required />
+                <input 
+                  type='text' 
+                  placeholder='enter your email' 
+                  id='email' 
+                  value={this.state.email}
+                  className='form-control mb-3 shadow-sm' 
+                  required 
+                  onChange={this.handleTyping}/>
               </div>
             </div>
             <button className='btn btn-outline-primary btn-block shadow-sm' type='submit'>Login</button>
