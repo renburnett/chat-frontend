@@ -14,7 +14,7 @@ class Login extends PureComponent {
 
   userLogin = (e) => {
     e.preventDefault()
-    let currentUser = this.props.users.find(user => user.email === this.state.email && user.name === this.state.username)
+    let currentUser = this.props.users.find(user => user.email.toLowerCase() === this.state.email.toLowerCase() && user.name.toLowerCase() === this.state.username.toLowerCase())
     if (!currentUser) {
       this.createUser().then(newUser => {
         if (newUser.id) {
