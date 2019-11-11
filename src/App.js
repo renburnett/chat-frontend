@@ -8,11 +8,11 @@ import Login from './containers/Login'
 import ChatWindow from './containers/ChatWindow'
 
 class App extends Component {
-
   state = {
     users: [],
     loggedIn: false,
-    loggedInUser: {}
+    loggedInUser: {},
+    conversations: []
   }
 
   logIn = (user) => {
@@ -23,16 +23,26 @@ class App extends Component {
   }
 
   getUsers = () => {
-    fetch('http://http.localhost:3000/users')
+    fetch('http://localhost:3000/users')
     .then(res=>res.json())
-    .then(usersList => this.setState({
-      users: usersList
-    }))
+    .then(usersList => this.setState({users: usersList}))
+  }
+
+  getConvos = () => {
+    fetch('http://localhost:3000/conversations')
+    .then(res => res.json())
+    .then((convoList) => this.setState({conversations: convoList}))
   }
 
   componentDidMount(){
     this.getUsers()
+    this.getConvos()
   }
+
+  addNewConversation = (newTopic) => {
+    this.setState(prevState => {
+      return { conversations: [...prevState.conversations, newTopic] }
+    })  }
 
   addNewUser = (newUser) => {
     this.setState(prevState => {
@@ -40,8 +50,9 @@ class App extends Component {
     })
   }
 
-  handleClickUserConversation = () => {
-    console.log("handleClickUserConversation, clicked here")
+  handleClickConversation = () => {
+    this.getConvos()
+    console.log("handleClickConversation, clicked here")
   }
 
   render(){
@@ -55,12 +66,20 @@ class App extends Component {
                 handleLogIn={this.logIn}
                 users={this.state.users}
                 addNewUser={this.addNewUser}
-                loggedIn={this.state.loggedIn}/>
-              }
-            } />
+                loggedIn={this.state.loggedIn}
+              />}
+            }/>
             <div className="row">
               <Route path='/' render={props => <ChatWindow {...props} loggedIn={this.state.loggedIn} />} />
-              <Route path='/' render={props => <Sidebar {...props} loggedIn={this.state.loggedIn} users={this.state.users} handleClickUserConversation={this.handleClickUserConversation} />} />
+              <Route path='/' render={props => {
+                return <Sidebar 
+                  {...props} 
+                  loggedIn={this.state.loggedIn} 
+                  convos={this.state.conversations} 
+                  handleClickConversation={this.handleClickConversation}
+                  addNewConversation={this.addNewConversation}
+                />}
+              }/>
             </div>
           </div>
         </Router>
