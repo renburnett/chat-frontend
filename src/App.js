@@ -12,7 +12,10 @@ class App extends Component {
     users: [],
     loggedIn: false,
     loggedInUser: {},
-    conversations: []
+    conversations: [],
+    currentConversation: {
+      messages: []
+    }
   }
 
   logIn = (user) => {
@@ -50,9 +53,8 @@ class App extends Component {
     })
   }
 
-  handleClickConversation = () => {
-    this.getConvos()
-    console.log("handleClickConversation, clicked here")
+  handleClickConversation = (convo) => {
+    this.setState({currentConversation: convo})
   }
 
   render(){
@@ -70,7 +72,13 @@ class App extends Component {
               />}
             }/>
             <div className="row">
-              <Route path='/' render={props => <ChatWindow {...props} loggedIn={this.state.loggedIn} />} />
+              <Route path='/' render={props => {
+                return <ChatWindow 
+                  {...props}
+                  currentConversation={this.state.currentConversation} 
+                  loggedIn={this.state.loggedIn} 
+                />}
+              }/>
               <Route path='/' render={props => {
                 return <Sidebar 
                   {...props} 

@@ -8,7 +8,7 @@ class Sidebar extends PureComponent {
   displayConversation = (convos) => {
     return convos.map( (convo)=> {
       return (
-        <div className='row col mx-auto px-md-5 p-3 border bg-light' onClick={() => this.props.handleClickConversation()} >
+        <div className='row col mx-auto px-md-5 p-3 border bg-light' onClick={(e) => this.props.handleClickConversation(convo)} >
           <Conversation key={convo.id} convo={convo} />
         </div> 
       )
