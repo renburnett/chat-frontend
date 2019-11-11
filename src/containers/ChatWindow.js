@@ -13,4 +13,5 @@ class ChatWindow extends PureComponent {
   }
 }
 
-export default PrivacyHOC(ChatWindow)
+export default ChatWindow
+// export default PrivacyHOC(ChatWindow)

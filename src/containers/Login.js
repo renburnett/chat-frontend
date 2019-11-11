@@ -70,7 +70,7 @@ class Login extends PureComponent {
           <div className='card-body'>
             <form onSubmit={this.userLogin}>
               <div className='form-group form-row'>
-                <label htmlFor='username' className='col-sm-3 col-form-label-sm'>Username</label>
+                <label htmlFor='username' className='col-sm-3 col-form-label-sm far fa-user'>  Username</label>
                 <div className='col'>
                   <input 
                     type='text' 
@@ -83,7 +83,7 @@ class Login extends PureComponent {
                 </div>
               </div>
               <div className='fom-group form-row'>
-                <label htmlFor='email' className='col-sm-3 col-form-label-sm'>Email</label>
+                <label htmlFor='email' className='col-sm-3 col-form-label-sm far fa-envelope'> Email</label>
                 <div className='col'>
                   <input 
                     type='text' 
