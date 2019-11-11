@@ -5,7 +5,6 @@ import PrivacyHOC from '../HOC/PrivacyHOC'
 class Sidebar extends PureComponent {
 
   displayUsers = (users) => {
-    // console.timeLog(users,"users is it the full object?")
     return users.map( (user)=> {
       return (
         <div className='row col mx-auto px-md-5 p-3 border bg-light' onClick={() => this.props.handleClickUserConversation()} >
@@ -14,8 +13,6 @@ class Sidebar extends PureComponent {
       )
     })
   }
-// will refactor to pull from state
-
 
   render () {
     return (
@@ -25,6 +22,4 @@ class Sidebar extends PureComponent {
   }
 }
 
-export default Sidebar
-
-// export default PrivacyHOC(Sidebar) will turn back on when i do a commit nov 10 4pm pst 
+export default PrivacyHOC(Sidebar)

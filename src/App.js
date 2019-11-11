@@ -41,7 +41,7 @@ class App extends Component {
   }
 
   handleClickUserConversation = () => {
-    console.log("handleClickUserConversation")
+    console.log("handleClickUserConversation, clicked here")
   }
 
   render(){
