@@ -46,7 +46,14 @@ class App extends Component {
         <Router>
           <Navbar />
           <div className="container">
-            <Route exact path='/login' render={props => <Login {...props} handleLogIn={this.logIn} users={this.state.users} addNewUser={this.addNewUser} />} />
+            <Route exact path='/login' render={props => {
+              return <Login {...props}
+                handleLogIn={this.logIn}
+                users={this.state.users}
+                addNewUser={this.addNewUser}
+                loggedIn={this.state.loggedIn}/>
+              }
+            } />
             <div className="row">
               <Route path='/' render={props => <ChatWindow {...props} loggedIn={this.state.loggedIn} />} />
               <Route path='/' render={props => <Sidebar {...props} loggedIn={this.state.loggedIn} users={this.state.users} />} />
