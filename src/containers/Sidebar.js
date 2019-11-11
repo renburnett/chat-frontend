@@ -5,11 +5,12 @@ import PrivacyHOC from '../HOC/PrivacyHOC'
 class Sidebar extends PureComponent {
 
   displayUsers = (users) => {
-    console.timeLog(users,"users is it the full object?")
+    // console.timeLog(users,"users is it the full object?")
     return users.map( (user)=> {
       return (
-        <div className='row col mx-auto px-md-5 p-3 border bg-light'>
-        <User key={user.id} user={user} /></div> 
+        <div className='row col mx-auto px-md-5 p-3 border bg-light' onClick={() => this.props.handleClickUserConversation()} >
+          <User key={user.id} user={user} />
+        </div> 
       )
     })
   }
