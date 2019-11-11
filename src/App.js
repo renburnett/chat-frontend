@@ -42,13 +42,22 @@ class App extends Component {
 
   render(){
     return (
-      <div className="App container" >
+      <div className="App" >
         <Router>
           <Navbar />
-          <Route exact path='/login' render={props => <Login {...props} handleLogIn={this.logIn} users={this.state.users} addNewUser={this.addNewUser} />} />
-          <div className="row">
-            <Route path='/' render={props => <ChatWindow {...props} loggedIn={this.state.loggedIn} />} />
-            <Route path='/' render={props => <Sidebar {...props} loggedIn={this.state.loggedIn} users={this.state.users} />} />
+          <div className="container">
+            <Route exact path='/login' render={props => {
+              return <Login {...props}
+                handleLogIn={this.logIn}
+                users={this.state.users}
+                addNewUser={this.addNewUser}
+                loggedIn={this.state.loggedIn}/>
+              }
+            } />
+            <div className="row">
+              <Route path='/' render={props => <ChatWindow {...props} loggedIn={this.state.loggedIn} />} />
+              <Route path='/' render={props => <Sidebar {...props} loggedIn={this.state.loggedIn} users={this.state.users} />} />
+            </div>
           </div>
         </Router>
       </div>

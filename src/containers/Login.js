@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import LoginAlert from '../components/LoginAlert'
+import LoggedInHOC from '../HOC/LoggedInHOC'
 
 class Login extends PureComponent {
   state = {
@@ -14,7 +15,7 @@ class Login extends PureComponent {
 
   userLogin = (e) => {
     e.preventDefault()
-    let currentUser = this.props.users.find(user => user.email.toLowerCase() === this.state.email.toLowerCase() && user.name.toLowerCase() === this.state.username.toLowerCase())
+    let currentUser = this.props.users.find(user => user.email === this.state.email.toLowerCase() && user.name === this.state.username.toLowerCase())
     if (!currentUser) {
       this.createUser().then(newUser => {
         if (newUser.id) {
@@ -103,4 +104,4 @@ class Login extends PureComponent {
   }
 }
 
-export default Login
+export default LoggedInHOC(Login)
