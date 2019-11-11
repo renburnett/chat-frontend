@@ -6,14 +6,18 @@ class Sidebar extends PureComponent {
 
   displayUsers = (users) => {
     return users.map( (user)=> {
-      return <User key={user.id} user={user} />
+      return (
+        <div className='row col mx-auto px-md-5 p-3 border bg-light' onClick={() => this.props.handleClickUserConversation()} >
+          <User key={user.id} user={user} />
+        </div> 
+      )
     })
   }
-// will refactor to pull from state
 
   render () {
     return (
-      <div className='col sidebar'> {this.displayUsers(this.props.users)}</div>
+        <div className='col sidebar'>{this.displayUsers(this.props.users)}
+        </div>
     )
   }
 }

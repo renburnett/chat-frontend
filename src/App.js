@@ -40,6 +40,10 @@ class App extends Component {
     })
   }
 
+  handleClickUserConversation = () => {
+    console.log("handleClickUserConversation, clicked here")
+  }
+
   render(){
     return (
       <div className="App" >
@@ -56,7 +60,7 @@ class App extends Component {
             } />
             <div className="row">
               <Route path='/' render={props => <ChatWindow {...props} loggedIn={this.state.loggedIn} />} />
-              <Route path='/' render={props => <Sidebar {...props} loggedIn={this.state.loggedIn} users={this.state.users} />} />
+              <Route path='/' render={props => <Sidebar {...props} loggedIn={this.state.loggedIn} users={this.state.users} handleClickUserConversation={this.handleClickUserConversation} />} />
             </div>
           </div>
         </Router>

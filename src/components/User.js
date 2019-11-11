@@ -2,7 +2,7 @@ import React from 'react'
 
 const User = (props) => {
   return (
-    <div>
+    <div className='far fa-circle'>
       {props.user.name}
     </div>
   )
