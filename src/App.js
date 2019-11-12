@@ -15,7 +15,7 @@ class App extends Component {
     conversations: [],
     currentConversation: {
       messages: []
-    }
+    },
   }
 
   logIn = (user) => {
@@ -57,6 +57,15 @@ class App extends Component {
     this.setState({currentConversation: convo})
   }
 
+  updateCurrentConversation = (newMessage) => {
+    this.setState(prevState => {
+      return {currentConversation: {
+        ...prevState.currentConversation,
+        messages: [...prevState.currentConversation.messages, newMessage]
+      }}
+    })
+  }
+
   render(){
     return (
       <div className="App" >
@@ -64,7 +73,8 @@ class App extends Component {
           <Navbar />
           <div className="container">
             <Route exact path='/login' render={props => {
-              return <Login {...props}
+              return <Login 
+                {...props}
                 handleLogIn={this.logIn}
                 users={this.state.users}
                 addNewUser={this.addNewUser}
@@ -75,7 +85,8 @@ class App extends Component {
               <Route path='/' render={props => {
                 return <ChatWindow 
                   {...props}
-                  currentConversation={this.state.currentConversation} 
+                  currentConversation={this.state.currentConversation}
+                  updateCurrentConversation={this.updateCurrentConversation}
                   loggedIn={this.state.loggedIn} 
                 />}
               }/>
