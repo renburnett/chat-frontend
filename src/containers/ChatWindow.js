@@ -15,10 +15,12 @@ class ChatWindow extends PureComponent {
     return (
       <div className='col-9 chat-window'>
         {this.displayConversationMessages()}
-        {this.props.currentConversation.topic ? <MessageForm
-          currentConversation={this.props.currentConversation} 
-          updateCurrentConversation={this.props.updateCurrentConversation} 
-        /> : null}
+        {this.props.currentConversation.topic 
+        ? <MessageForm 
+            currentConversation={this.props.currentConversation} 
+            updateCurrentConversation={this.props.updateCurrentConversation} 
+          /> 
+        : null}
       </div>
     )
   }
