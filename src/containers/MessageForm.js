@@ -4,8 +4,13 @@ class MessageForm extends PureComponent {
   state = {
     content: ''
   }
+
   handleSubmit = (e) => {
     e.preventDefault()
+
+    const user = JSON.parse(window.localStorage.getItem('loggedInUser'))
+    console.log("user", user)
+    console.log("user id", user.id)
 
     const config = {
       method: 'POST',
@@ -16,7 +21,7 @@ class MessageForm extends PureComponent {
       body: JSON.stringify({
         content: this.state.content,
         conversation_id: this.props.currentConversation.id,
-        user_id: 1, // TODO: need to update this to current user! 
+        user_id: user.id,
         is_read: false
       })
     }

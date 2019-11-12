@@ -23,6 +23,7 @@ class App extends Component {
       loggedIn: true,
       loggedInUser: user
     })
+    window.localStorage.setItem('loggedInUser', JSON.stringify(user))
   }
 
   getUsers = () => {
