@@ -49,5 +49,4 @@ class Sidebar extends PureComponent {
   }
 }
 
-//export default PrivacyHOC(Sidebar)
-export default Sidebar
+export default PrivacyHOC(Sidebar)

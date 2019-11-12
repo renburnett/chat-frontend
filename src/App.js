@@ -11,7 +11,6 @@ class App extends Component {
   state = {
     users: [],
     loggedIn: false,
-    loggedInUser: {},
     conversations: [],
     currentConversation: {
       messages: []
@@ -20,8 +19,7 @@ class App extends Component {
 
   logIn = (user) => {
     this.setState({
-      loggedIn: true,
-      loggedInUser: user
+      loggedIn: true
     })
     window.localStorage.setItem('currentUser', JSON.stringify(user))
   }
@@ -112,3 +110,4 @@ class App extends Component {
 }
 
 export default App
+

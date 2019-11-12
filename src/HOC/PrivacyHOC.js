@@ -6,7 +6,7 @@ const PrivacyHOC = (WrappedComponent) => {
     render () {
       return (
         <>
-          {this.props.loggedIn ? <WrappedComponent {...this.props} /> : <Redirect to='/login' />}
+          {window.localStorage.currentUser ? <WrappedComponent {...this.props} /> : <Redirect to='/login' />}
         </>
       )
     }

@@ -6,7 +6,7 @@ const LoggedInHOC = (WrappedComponent) => {
     render () {
       return (
         <>
-          {this.props.loggedIn ? <Redirect to='/' /> : <WrappedComponent {...this.props} />}
+          {window.localStorage.currentUser ? <Redirect to='/' /> : <WrappedComponent {...this.props} />}
         </>
       )
     }
