@@ -82,7 +82,7 @@ class Login extends PureComponent {
                     onChange={this.handleTyping}/>
                 </div>
               </div>
-              <div className='fom-group form-row'>
+              <div className='form-group form-row'>
                 <label htmlFor='email' className='col-sm-3 col-form-label-sm far fa-envelope'> Email</label>
                 <div className='col'>
                   <input 
