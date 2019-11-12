@@ -81,7 +81,7 @@ class App extends Component {
                 loggedIn={this.state.loggedIn}
               />}
             }/>
-            <div className="card shadow mt-3">
+            <div className="card shadow mt-3 p-3">
               <div className="row">
                 <Route path='/' render={props => {
                   return <ChatWindow 
