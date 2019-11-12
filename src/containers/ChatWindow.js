@@ -15,6 +15,9 @@ class ChatWindow extends PureComponent {
     return (
       <div className='col-9 chat-window'>
         {this.displayConversationMessages()}
+        <div>
+          {/* TODO: remove this temp div which just shoves inpur form to bottom while no messages present */}
+        </div>
         <MessageForm 
           currentConversation={this.props.currentConversation} 
           updateCurrentConversation={this.props.updateCurrentConversation} 
