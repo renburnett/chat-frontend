@@ -8,9 +8,7 @@ class MessageForm extends PureComponent {
   handleSubmit = (e) => {
     e.preventDefault()
 
-    const user = JSON.parse(window.localStorage.getItem('loggedInUser'))
-    console.log("user", user)
-    console.log("user id", user.id)
+    const user = JSON.parse(window.localStorage.getItem('currentUser'))
 
     const config = {
       method: 'POST',

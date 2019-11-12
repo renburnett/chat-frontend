@@ -23,7 +23,7 @@ class App extends Component {
       loggedIn: true,
       loggedInUser: user
     })
-    window.localStorage.setItem('loggedInUser', JSON.stringify(user))
+    window.localStorage.setItem('currentUser', JSON.stringify(user))
   }
 
   getUsers = () => {
@@ -90,6 +90,7 @@ class App extends Component {
                     currentConversation={this.state.currentConversation}
                     updateCurrentConversation={this.updateCurrentConversation}
                     loggedIn={this.state.loggedIn}
+                    users={this.state.users}
                   />}
                 }/>
                 <Route path='/' render={props => {
