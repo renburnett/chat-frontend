@@ -43,7 +43,7 @@ class MessageForm extends PureComponent {
 
   render () {
     return (
-      <div className='row message-form'>
+      <div className='row message-form d-flex flex-row justify-content-between'>
         <form onSubmit={this.handleSubmit}>
           <input 
             value={this.state.content} 
