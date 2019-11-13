@@ -117,28 +117,26 @@ class App extends Component {
                 loggedIn={this.state.loggedIn}
               />}
             }/>
-            <div className="">
-              <div className="row">
-                <Route path='/' render={props => {
-                  return <ChatWindow 
-                    {...props}
-                    currentConversation={this.state.currentConversation}
-                    updateCurrentConversation={this.updateCurrentConversation}
-                    loggedIn={this.state.loggedIn}
-                    users={this.state.users}
-                  />}
-                }/>
-                <Route path='/' render={props => {
-                  return <Sidebar 
-                    {...props}
-                    loggedIn={this.state.loggedIn}
-                    convos={this.state.conversations}
-                    handleClickConversation={this.handleClickConversation}
-                    addNewConversation={this.addNewConversation}
-                    currentConversation={this.state.currentConversation}
-                  />}
-                }/>
-              </div>
+            <div className="row">
+              <Route path='/' render={props => {
+                return <ChatWindow 
+                  {...props}
+                  currentConversation={this.state.currentConversation}
+                  updateCurrentConversation={this.updateCurrentConversation}
+                  loggedIn={this.state.loggedIn}
+                  users={this.state.users}
+                />}
+              }/>
+              <Route path='/' render={props => {
+                return <Sidebar 
+                  {...props}
+                  loggedIn={this.state.loggedIn}
+                  convos={this.state.conversations}
+                  handleClickConversation={this.handleClickConversation}
+                  addNewConversation={this.addNewConversation}
+                  currentConversation={this.state.currentConversation}
+                />}
+              }/>
             </div>
           </div>
         </Router>
