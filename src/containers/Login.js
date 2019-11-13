@@ -41,7 +41,7 @@ class Login extends PureComponent {
         name: this.state.username.toLowerCase(),
         email: this.state.email.toLowerCase()
       })
-    }).then(resp => resp.json())
+    }).then(res => res.json())
   }
 
   errorLoggingIn = () => {
