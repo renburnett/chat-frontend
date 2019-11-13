@@ -9,13 +9,13 @@ class Sidebar extends PureComponent {
     return convos.map( (convo)=> {
       return (
         <div key={convo.id} className='row col mx-auto px-md-5 p-3 border bg-light' onClick={(e) => this.props.handleClickConversation(convo)} >
-          <ConversationTopics  convo={convo} />
-        </div> 
+          <ConversationTopics convo={convo} />
+        </div>
       )
     })
   }
 
-  handleNewConversation = (e) => {
+  handleNewConversation = (e, topic) => {
     e.preventDefault()
 
     const config = {
@@ -25,10 +25,11 @@ class Sidebar extends PureComponent {
         'accept': 'application/json'
       },
       body: JSON.stringify({
-        topic: e.target.children[0].value
+        topic: topic
       })
     }
-    e.target.children[0].value = ""
+    
+    topic = ""
 
     fetch('http://localhost:3000/conversations', config)
     .then(res => res.json())
