@@ -83,6 +83,14 @@ class App extends Component {
     })
   }
 
+  handleReceivedConversation = (response) => {
+    const { conversation } = response;
+    this.setState({
+      conversations: [...this.state.conversations, conversation]
+    });
+  };
+
+
   handleReceivedMessage = (newMessage) => {
     const conversations = [...this.state.conversations];
     const conversation = conversations.find(
@@ -90,7 +98,7 @@ class App extends Component {
     );
     conversation.messages = [...conversation.messages, newMessage];
     this.setState({ conversations });
-  }
+  };
 
   render(){
     return (
@@ -103,7 +111,7 @@ class App extends Component {
           }
         <ActionCable 
           channel={{channel: "ConversationsChannel"}}
-          handleReceivedMessage={this.handleReceivedMessage}
+          onReceived={this.handleReceivedConversation}
         />
         <Router>
           <Navbar loggedIn={this.state.loggedIn} handleLogout={this.logout} />
