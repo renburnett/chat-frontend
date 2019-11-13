@@ -33,6 +33,14 @@ class App extends Component {
     window.localStorage.removeItem('currentUser')
   }
 
+  checkForLoggedInUser = () => {
+    if (window.localStorage.currentUser) {
+      this.setState({
+        loggedIn: true
+      })
+    }
+  }
+
   getUsers = () => {
     fetch('http://localhost:3000/users')
     .then(res=>res.json())
@@ -48,6 +56,7 @@ class App extends Component {
   componentDidMount(){
     this.getUsers()
     this.getConvos()
+    this.checkForLoggedInUser()
   }
 
   addNewConversation = (newTopic) => {
