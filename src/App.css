@@ -17,6 +17,11 @@
   height: 100vh;
 }
 
+.col-sm-3 {
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
 .message-form {
   flex-direction: row;
   justify-content: space-between;

@@ -6,6 +6,8 @@ import Sidebar from './containers/Sidebar'
 import Navbar from './containers/Navbar'
 import Login from './containers/Login'
 import ChatWindow from './containers/ChatWindow'
+import { ActionCable } from 'react-actioncable-provider';
+import Cable from './components/Cable';
 
 class App extends Component {
   state = {
@@ -17,11 +19,26 @@ class App extends Component {
     },
   }
 
-  logIn = (user) => {
+  login = (user) => {
     this.setState({
       loggedIn: true
     })
     window.localStorage.setItem('currentUser', JSON.stringify(user))
+  }
+
+  logout = () => {
+    this.setState({
+      loggedIn: false
+    })
+    window.localStorage.removeItem('currentUser')
+  }
+
+  checkForLoggedInUser = () => {
+    if (window.localStorage.currentUser) {
+      this.setState({
+        loggedIn: true
+      })
+    }
   }
 
   getUsers = () => {
@@ -39,6 +56,7 @@ class App extends Component {
   componentDidMount(){
     this.getUsers()
     this.getConvos()
+    this.checkForLoggedInUser()
   }
 
   addNewConversation = (newTopic) => {
@@ -65,42 +83,60 @@ class App extends Component {
     })
   }
 
+  handleReceivedMessage = (newMessage) => {
+    const conversations = [...this.state.conversations];
+    const conversation = conversations.find(
+      conversation => conversation.id === newMessage.conversation_id
+    );
+    conversation.messages = [...conversation.messages, newMessage];
+    this.setState({ conversations });
+  }
+
   render(){
     return (
       <div className="App" >
+        {this.state.conversations.length ?
+          (<Cable
+            conversations={this.state.conversations}
+            handleReceivedMessage={this.handleReceivedMessage}
+          />) : null
+          }
+        <ActionCable 
+          channel={{channel: "ConversationsChannel"}}
+          handleReceivedMessage={this.handleReceivedMessage}
+        />
         <Router>
-          <Navbar />
+          <Navbar loggedIn={this.state.loggedIn} handleLogout={this.logout} />
           <div className="container">
             <Route exact path='/login' render={props => {
               return <Login 
                 {...props}
-                handleLogIn={this.logIn}
+                handleLogin={this.login}
                 users={this.state.users}
                 addNewUser={this.addNewUser}
                 loggedIn={this.state.loggedIn}
               />}
             }/>
-            <div className="card shadow mt-3 p-3">
-              <div className="row">
-                <Route path='/' render={props => {
-                  return <ChatWindow 
-                    {...props}
-                    currentConversation={this.state.currentConversation}
-                    updateCurrentConversation={this.updateCurrentConversation}
-                    loggedIn={this.state.loggedIn}
-                    users={this.state.users}
-                  />}
-                }/>
-                <Route path='/' render={props => {
-                  return <Sidebar 
-                    {...props}
-                    loggedIn={this.state.loggedIn}
-                    convos={this.state.conversations}
-                    handleClickConversation={this.handleClickConversation}
-                    addNewConversation={this.addNewConversation}
-                  />}
-                }/>
-              </div>
+            <div className="row">
+              <Route path='/' render={props => {
+                return <ChatWindow 
+                  {...props}
+                  currentConversation={this.state.currentConversation}
+                  updateCurrentConversation={this.updateCurrentConversation}
+                  loggedIn={this.state.loggedIn}
+                  users={this.state.users}
+                />}
+              }/>
+              <Route path='/' render={props => {
+                return <Sidebar 
+                  {...props}
+                  loggedIn={this.state.loggedIn}
+                  convos={this.state.conversations}
+                  handleClickConversation={this.handleClickConversation}
+                  addNewConversation={this.addNewConversation}
+                  currentConversation={this.state.currentConversation}
+                />}
+              }/>
             </div>
           </div>
         </Router>

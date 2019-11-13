@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import Conversation from '../components/Conversation'
+import ConversationTopics from '../components/ConversationTopics'
 import NewConversationForm from '../components/NewConversationForm'
 import PrivacyHOC from '../HOC/PrivacyHOC'
 
@@ -8,27 +8,28 @@ class Sidebar extends PureComponent {
   displayConversation = (convos) => {
     return convos.map( (convo)=> {
       return (
-        <div className='row col mx-auto px-md-5 p-3 border bg-light' onClick={(e) => this.props.handleClickConversation(convo)} >
-          <Conversation key={convo.id} convo={convo} />
-        </div> 
+        <div key={convo.id} className='card mr-3 ml-3 mb-1 shadow-sm p-2' onClick={(e) => this.props.handleClickConversation(convo)} >
+          <ConversationTopics convo={convo} currentConversation={this.props.currentConversation}/>
+        </div>
       )
     })
   }
 
-  handleNewConversation = (e) => {
+  handleNewConversation = (e, topic) => {
     e.preventDefault()
 
     const config = {
-      method: 'POST',      
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'accept': 'application/json'
       },
       body: JSON.stringify({
-        topic: e.target.children[0].value
+        topic: topic
       })
     }
-    e.target.children[0].value = ""
+    
+    topic = ""
 
     fetch('http://localhost:3000/conversations', config)
     .then(res => res.json())
@@ -41,10 +42,14 @@ class Sidebar extends PureComponent {
 
   render () {
     return (
-        <div className='col sidebar'>
+      <div className='col-sm-3 bg-light sidebar card shadow mt-3'>
+        <div className='card-header p-3 mb-3'>
           <NewConversationForm handleNewConversation={this.handleNewConversation}/>
+        </div>
+        <div className='bard-body overflow-auto'>
           {this.displayConversation(this.props.convos)}
         </div>
+      </div>
     )
   }
 }
