@@ -13,7 +13,7 @@ class ChatWindow extends PureComponent {
 
   render () {
     return (
-      <div className='col-9 chat-window'>
+      <div className='col-9 chat-window card shadow mt-3 p-3'>
         {this.displayConversationMessages()}
         {this.props.currentConversation.topic 
         ? <MessageForm 

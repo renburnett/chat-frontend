@@ -20,13 +20,13 @@ class Login extends PureComponent {
       this.createUser().then(newUser => {
         if (newUser.id) {
           this.props.addNewUser(newUser)
-          this.props.handleLogIn(newUser)
+          this.props.handleLogin(newUser)
         } else {
           this.errorLoggingIn()
         }
       })
     } else {
-      this.props.handleLogIn(currentUser)
+      this.props.handleLogin(currentUser)
     }
   }
 

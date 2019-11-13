@@ -19,7 +19,7 @@ class App extends Component {
     },
   }
 
-  logIn = (user) => {
+  login = (user) => {
     this.setState({
       loggedIn: true
     })
@@ -60,20 +60,21 @@ class App extends Component {
 
   updateCurrentConversation = (newMessage) => {
     this.setState(prevState => {
-      return {
-        currentConversation: { ...prevState.currentConversation, messages: [...prevState.currentConversation.messages, newMessage] },
-      }
+      return {currentConversation: {
+        ...prevState.currentConversation,
+        messages: [...prevState.currentConversation.messages, newMessage]
+      }}
     })
-    // TODO: fix this!
-    this.setState((prevState) => { return { conversations: [...prevState.conversations, prevState.currentConversation] }});
   }
 
-  handleReceivedMessage = (messageReceived) => {
-    console.log("Action cable response", messageReceived)
-    // TODO: fix this!
-    const conversation = [...this.state.currentConversation.messages, messageReceived.message];
-    this.setState((prevState) => { return { conversations: [...prevState.conversations, conversation] }});
-  };
+  handleReceivedMessage = (newMessage) => {
+    const conversations = [...this.state.conversations];
+    const conversation = conversations.find(
+      conversation => conversation.id === newMessage.conversation_id
+    );
+    conversation.messages = [...conversation.messages, newMessage];
+    this.setState({ conversations });
+  }
 
   render(){
     return (
@@ -94,13 +95,13 @@ class App extends Component {
             <Route exact path='/login' render={props => {
               return <Login 
                 {...props}
-                handleLogIn={this.logIn}
+                handleLogin={this.login}
                 users={this.state.users}
                 addNewUser={this.addNewUser}
                 loggedIn={this.state.loggedIn}
               />}
             }/>
-            <div className="card shadow mt-3 p-3">
+            <div className="">
               <div className="row">
                 <Route path='/' render={props => {
                   return <ChatWindow 

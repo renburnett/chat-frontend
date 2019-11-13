@@ -42,7 +42,7 @@ class Sidebar extends PureComponent {
 
   render () {
     return (
-      <div className='col sidebar'>
+      <div className='col sidebar card shadow mt-3 p-3'>
         <NewConversationForm handleNewConversation={this.handleNewConversation}/>
         {this.displayConversation(this.props.convos)}
       </div>

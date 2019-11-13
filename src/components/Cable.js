@@ -8,7 +8,7 @@ const Cable = (props) => {
         <ActionCable
           key={convo.id}
           channel={{ channel: 'MessagesChannel', conversation: convo.id }}
-          onReceived={props.handleReceivedMessage}
+          onReceived={(e) => props.handleReceivedMessage(e.message)}
         />
       )
     })
