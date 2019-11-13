@@ -135,6 +135,7 @@ class App extends Component {
                     convos={this.state.conversations}
                     handleClickConversation={this.handleClickConversation}
                     addNewConversation={this.addNewConversation}
+                    currentConversation={this.state.currentConversation}
                   />}
                 }/>
               </div>
