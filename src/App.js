@@ -8,6 +8,8 @@ import Login from './containers/Login'
 import ChatWindow from './containers/ChatWindow'
 import { ActionCable } from 'react-actioncable-provider';
 import Cable from './components/Cable';
+import EditUser from './components/EditUser';
+
 
 class App extends Component {
   state = {
@@ -32,6 +34,19 @@ class App extends Component {
     })
     window.localStorage.removeItem('currentUser')
   }
+
+  handleEditUser = () => {
+    console.log("clicking on handleEditUser")
+    // when you click on the edit profile
+    //the entire page goes away
+    //and you are taken to a edit form
+  }
+
+  handleUpdatingUser = () => {
+    console.log("did I click on the submit button in the edit form")
+    // part two - once page can render without everything on the page, then 
+  }
+  
 
   checkForLoggedInUser = () => {
     if (window.localStorage.currentUser) {
@@ -106,7 +121,11 @@ class App extends Component {
           handleReceivedMessage={this.handleReceivedMessage}
         />
         <Router>
-          <Navbar loggedIn={this.state.loggedIn} handleLogout={this.logout} />
+          <Navbar loggedIn={this.state.loggedIn} 
+          handleLogout={this.logout} 
+          handleEditUser={this.handleEditUser} 
+          handleUpdatingUser={this.props.handleUpdatingUser}
+          />
           <div className="container">
             <Route exact path='/login' render={props => {
               return <Login 

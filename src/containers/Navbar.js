@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import { NavLink } from 'react-router-dom'
+import EditUser from '../components/EditUser'
 
 class Navbar extends PureComponent {
 
@@ -8,7 +9,10 @@ class Navbar extends PureComponent {
       return (
         <>
           <NavLink to='/user'>
-            <div className='nav-item nav-link active'>Edit Profile</div>
+            <div className='nav-item nav-link active' 
+            onClick={this.props.handleEditUser} 
+            handleUpdatingUser={this.props.handleUpdatingUser}
+            >Edit Profile</div>
           </NavLink>
           <NavLink to='/login'>
             <div className='nav-item nav-link active' onClick={this.props.handleLogout}>Logout</div>
