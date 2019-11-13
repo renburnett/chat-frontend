@@ -9,16 +9,23 @@ class Navbar extends PureComponent {
 
   render () {
     return (
-      <nav className='row navbar navbar-dark bg-dark'>
+      <nav className='navbar navbar-dark bg-dark'>
         <NavLink to='/'>
-          <h1 className='navbar-brand pl-3' to='/'>Chat</h1>
+          <h1 className='navbar-brand'>Chat</h1>
         </NavLink>
-        <NavLink to='/login'>
-          <div className='pr-3'>Login</div>
+        <NavLink to='/user'>
+          <div className='navbar-brand'> Edit Profile</div>
         </NavLink>
-        <NavLink to='/login'>
-          <button className='pr-3' onClick={this.logout}>Logout</button>
-        </NavLink>
+        <div className='navbar-nav'>
+          {window.localStorage.currentUser
+          ? (<NavLink to='/login'>
+              <div className='nav-item nav-link active' onClick={this.logout}>Logout</div>
+            </NavLink>)
+          : (<NavLink to='/login'>
+              <div className='nav-item nav-link active'>Login</div>
+            </NavLink>)
+          }
+        </div>
       </nav>
     )
   }
