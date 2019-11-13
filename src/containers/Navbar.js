@@ -1,10 +1,27 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 
-class Navbar extends PureComponent {
+class Navbar extends Component {
 
-  logout = () => {
-    window.localStorage.removeItem('currentUser')
+  userIsLoggedIn = () => {
+    if (this.props.loggedIn) {
+      return (
+        <>
+          <NavLink to='/user'>
+            <div className='nav-item nav-link active'>Edit Profile</div>
+          </NavLink>
+          <NavLink to='/login'>
+            <div className='nav-item nav-link active' onClick={this.props.handleLogout}>Logout</div>
+          </NavLink>
+        </>
+      )
+    } else {
+      return (
+        <NavLink to='/login'>
+          <div className='nav-item nav-link active'>Login</div>
+        </NavLink>
+      )
+    }
   }
 
   render () {
@@ -13,19 +30,7 @@ class Navbar extends PureComponent {
         <NavLink to='/'>
           <h1 className='navbar-brand'>Chat</h1>
         </NavLink>
-        <NavLink to='/user'>
-          <div className='navbar-brand'> Edit Profile</div>
-        </NavLink>
-        <div className='navbar-nav'>
-          {window.localStorage.currentUser
-          ? (<NavLink to='/login'>
-              <div className='nav-item nav-link active' onClick={this.logout}>Logout</div>
-            </NavLink>)
-          : (<NavLink to='/login'>
-              <div className='nav-item nav-link active'>Login</div>
-            </NavLink>)
-          }
-        </div>
+        {this.userIsLoggedIn()}
       </nav>
     )
   }

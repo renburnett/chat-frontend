@@ -26,6 +26,13 @@ class App extends Component {
     window.localStorage.setItem('currentUser', JSON.stringify(user))
   }
 
+  logout = () => {
+    this.setState({
+      loggedIn: false
+    })
+    window.localStorage.removeItem('currentUser')
+  }
+
   getUsers = () => {
     fetch('http://localhost:3000/users')
     .then(res=>res.json())
@@ -90,7 +97,7 @@ class App extends Component {
           handleReceivedMessage={this.handleReceivedMessage}
         />
         <Router>
-          <Navbar />
+          <Navbar loggedIn={this.state.loggedIn} handleLogout={this.logout} />
           <div className="container">
             <Route exact path='/login' render={props => {
               return <Login 
