@@ -19,7 +19,7 @@ class Sidebar extends PureComponent {
     e.preventDefault()
 
     const config = {
-      method: 'POST',      
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'accept': 'application/json'

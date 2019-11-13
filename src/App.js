@@ -6,6 +6,8 @@ import Sidebar from './containers/Sidebar'
 import Navbar from './containers/Navbar'
 import Login from './containers/Login'
 import ChatWindow from './containers/ChatWindow'
+import { ActionCable } from 'react-actioncable-provider';
+import Cable from './components/Cable';
 
 class App extends Component {
   state = {
@@ -58,16 +60,34 @@ class App extends Component {
 
   updateCurrentConversation = (newMessage) => {
     this.setState(prevState => {
-      return {currentConversation: {
-        ...prevState.currentConversation,
-        messages: [...prevState.currentConversation.messages, newMessage]
-      }}
+      return {
+        currentConversation: { ...prevState.currentConversation, messages: [...prevState.currentConversation.messages, newMessage] },
+      }
     })
+    // TODO: fix this!
+    this.setState((prevState) => { return { conversations: [...prevState.conversations, prevState.currentConversation] }});
   }
+
+  handleReceivedMessage = (messageReceived) => {
+    console.log("Action cable response", messageReceived)
+    // TODO: fix this!
+    const conversation = [...this.state.currentConversation.messages, messageReceived.message];
+    this.setState((prevState) => { return { conversations: [...prevState.conversations, conversation] }});
+  };
 
   render(){
     return (
       <div className="App" >
+        {this.state.conversations.length ?
+          (<Cable
+            conversations={this.state.conversations}
+            handleReceivedMessage={this.handleReceivedMessage}
+          />) : null
+          }
+        <ActionCable 
+          channel={{channel: "ConversationsChannel"}}
+          handleReceivedMessage={this.handleReceivedMessage}
+        />
         <Router>
           <Navbar />
           <div className="container">
