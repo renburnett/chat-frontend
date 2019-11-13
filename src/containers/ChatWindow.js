@@ -7,7 +7,7 @@ class ChatWindow extends PureComponent {
 
   displayConversationMessages = () => {
     return this.props.currentConversation.messages.map((message) => {
-      return <Message users={this.props.users} message={message}/>
+      return <Message users={this.props.users} key={message.id} message={message}/>
     })
   }
 
