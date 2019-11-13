@@ -5,20 +5,26 @@ const Message = (props) => {
     return props.users.find(user => user.id === props.message.user_id)
   }
 
+  const displayTime = () => {
+    return new Date(props.message.created_at).toLocaleString()
+  }
+
   const findCurrentUser = () => {
     return JSON.parse(window.localStorage.getItem('currentUser'))
   }
 
+  const displayBasedOnUser = () => {
+    if (findCurrentUser().id === findMessageAuthor().id) {
+      return 'card bg-primary text-light text-right p-2 shadow-sm'
+    } else {
+      return 'card bg-secondary text-light text-left p-2 shadow-sm'
+    }
+  }
+
   return (
-    <>
-      {findCurrentUser().id === findMessageAuthor().id
-        ? (<div className='card bg-primary text-light text-right p-2'>
-          {findMessageAuthor().name}: {props.message.content} @ {props.message.created_at}
-        </div>)
-        : (<div className='card bg-secondary text-light text-left p-2'>
-          {findMessageAuthor().name}: {props.message.content} @ {props.message.created_at}
-        </div>)}
-    </>
+    <div className={displayBasedOnUser()}>
+      {findMessageAuthor().name}: {props.message.content} @ {displayTime()}
+    </div>
   )
 }
 
