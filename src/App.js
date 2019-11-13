@@ -83,35 +83,18 @@ class App extends Component {
     })
   }
 
-  handleReceivedConversation = (response) => {
-    const { conversation } = response;
-    this.setState({
-      conversations: [...this.state.conversations, conversation]
-    });
-  };
-
-
-  handleReceivedMessage = (newMessage) => {
-    const conversations = [...this.state.conversations];
-    const conversation = conversations.find(
-      conversation => conversation.id === newMessage.conversation_id
-    );
-    conversation.messages = [...conversation.messages, newMessage];
-    this.setState({ conversations });
-  };
-
   render(){
     return (
       <div className="App" >
         {this.state.conversations.length ?
           (<Cable
             conversations={this.state.conversations}
-            handleReceivedMessage={this.handleReceivedMessage}
+            updateCurrentConversation={this.updateCurrentConversation}
           />) : null
           }
         <ActionCable 
           channel={{channel: "ConversationsChannel"}}
-          onReceived={this.handleReceivedConversation}
+          onReceived={(res) => this.addNewConversation(res.conversation)}
         />
         <Router>
           <Navbar loggedIn={this.state.loggedIn} handleLogout={this.logout} />
