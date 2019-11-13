@@ -15,6 +15,13 @@
 
 .sidebar {
   height: 100vh;
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+.col-sm-3 {
+  padding-right: 0px;
+  padding-left: 0px;
 }
 
 .message-form {

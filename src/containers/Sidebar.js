@@ -8,7 +8,7 @@ class Sidebar extends PureComponent {
   displayConversation = (convos) => {
     return convos.map( (convo)=> {
       return (
-        <div key={convo.id} className='row col mx-auto px-md-5 p-3 border bg-light' onClick={(e) => this.props.handleClickConversation(convo)} >
+        <div key={convo.id} className='card mr-3 ml-3 mb-1 shadow-sm p-2' onClick={(e) => this.props.handleClickConversation(convo)} >
           <ConversationTopics convo={convo} />
         </div>
       )
@@ -42,9 +42,13 @@ class Sidebar extends PureComponent {
 
   render () {
     return (
-      <div className='col sidebar card shadow mt-3 p-3'>
-        <NewConversationForm handleNewConversation={this.handleNewConversation}/>
-        {this.displayConversation(this.props.convos)}
+      <div className='col-sm-3 bg-light sidebar card shadow mt-3'>
+        <div className='card-header p-3 mb-3'>
+          <NewConversationForm handleNewConversation={this.handleNewConversation}/>
+        </div>
+        <div className='bard-body overflow-auto'>
+          {this.displayConversation(this.props.convos)}
+        </div>
       </div>
     )
   }

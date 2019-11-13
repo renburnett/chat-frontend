@@ -13,7 +13,7 @@ class NewConversationForm extends PureComponent {
 
   render () {
     return (
-      <div className='m-2 p-2 rounded shadow'>
+      <div className=''>
         <form onSubmit={e => this.props.handleNewConversation(e, this.state.topic)}>
           <div className='form-group'>
             <input
