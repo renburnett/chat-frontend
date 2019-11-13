@@ -5,9 +5,9 @@ const Cable = (props) => {
   const createCables = () => {
     return props.conversations.map((convo) => {
       return (
-        <ActionCable 
+        <ActionCable
           key={convo.id}
-          channel={{channel: "MessagesChannel", conversation: convo.id}}
+          channel={{ channel: 'MessagesChannel', conversation: convo.id }}
           onReceived={props.handleReceivedMessage}
         />
       )
