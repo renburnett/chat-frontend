@@ -11,10 +11,34 @@ class NewConversationForm extends PureComponent {
     })
   }
 
+  createNewConversation = (e) => {
+    e.preventDefault()
+
+    const config = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        topic: this.state.topic
+      })
+    }
+
+    fetch('http://localhost:3000/conversations', config)
+    .then(res => res.json())
+    .then(newTopic => {
+      if (newTopic.id) {
+        this.props.addNewConversation(newTopic)
+      }
+    this.setState({ topic: '' })
+    })
+  }
+
   render () {
     return (
       <div className=''>
-        <form onSubmit={e => this.props.handleNewConversation(e, this.state.topic)}>
+        <form onSubmit={e => this.createNewConversation(e)}>
           <div className='form-group'>
             <input
               onChange={this.handleTyping}
