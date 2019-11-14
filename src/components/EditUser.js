@@ -1,4 +1,5 @@
 import React from 'react'
+import API_URL from './constants/constants'
 
 class EditUser extends React.Component {
   state = {
@@ -31,7 +32,7 @@ class EditUser extends React.Component {
         email: this.state.email.toLowerCase()
       })
     }
-    fetch(`http://localhost:3000/users/${userId}`, config) 
+    fetch(`${API_URL}/users/${userId}`, config) 
     .then(res => res.json())
     .then(res => this.displayChanges(res))
     .then(this.props.getUsers())

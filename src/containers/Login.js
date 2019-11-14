@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import LoginAlert from '../components/LoginAlert'
 import LoggedInHOC from '../HOC/LoggedInHOC'
+import API_URL from './constants/constants'
 
 class Login extends PureComponent {
   state = {
@@ -31,7 +32,7 @@ class Login extends PureComponent {
   }
 
   createUser = () => {
-    return fetch('http://localhost:3000/users', {
+    return fetch(`${API_URL}/users`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

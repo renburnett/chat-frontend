@@ -8,9 +8,10 @@ import './index.css'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 import { ActionCableProvider } from 'react-actioncable-provider'
+import API_URL from './constants/constants'
 
 ReactDOM.render(
-  <ActionCableProvider url='ws://localhost:3000/cable'>
+  <ActionCableProvider url={`ws://${API_URL}/cable`}>
     <App />
   </ActionCableProvider>, document.getElementById('root')
 )

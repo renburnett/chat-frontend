@@ -9,6 +9,7 @@ import ChatWindow from './containers/ChatWindow'
 import { ActionCable } from 'react-actioncable-provider';
 import Cable from './components/Cable';
 import EditUser from './components/EditUser';
+import API_URL from './constants/constants'
 
 class App extends Component {
   state = {
@@ -43,13 +44,13 @@ class App extends Component {
   }
 
   getUsers = () => {
-    fetch('http://localhost:3000/users')
+    fetch(`${API_URL}/users`)
     .then(res=>res.json())
     .then(usersList => this.setState({users: usersList}))
   }
 
   getConvos = () => {
-    fetch('http://localhost:3000/conversations')
+    fetch(`${API_URL}/conversations`)
     .then(res => res.json())
     .then((convoList) => this.setState({conversations: convoList}))
   }
