@@ -59,4 +59,5 @@ class MessageForm extends PureComponent {
     )
   }
 }
+
 export default MessageForm

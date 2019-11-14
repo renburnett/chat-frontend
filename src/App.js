@@ -75,13 +75,13 @@ class App extends Component {
   }
 
   updateCurrentConversation = (newMessage) => {
-    this.setState(prevState => {
-      return {currentConversation: {
-        ...prevState.currentConversation,
-        messages: [...prevState.currentConversation.messages, newMessage]
-      }}
-    })
-  }
+    const conversations = [...this.state.conversations];
+    const conversation = conversations.find(
+      conversation => conversation.id === newMessage.conversation_id
+    );
+    conversation.messages = [...conversation.messages, newMessage];
+    this.setState({ conversations });
+  };
 
   render(){
     return (

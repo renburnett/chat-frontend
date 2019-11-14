@@ -48,19 +48,11 @@ class Login extends PureComponent {
     this.setState({
       loginError: true
     })
-    // console.log('checking for errors with logging in', errorPresent)
-    // if (errorPresent) {
-    //   console.log('There was an error. Unable to add new user to database.')
-    //   return <LoginAlert />
-    // } else {
-    //   console.log('No errors :)')
-    // }
   }
 
   render () {
     return (
       <>
-        {/* {this.errorLoggingIn()} */}
         {this.state.loginError ? <LoginAlert /> : null}
         <div className='card bg-light mt-3 mb-3 shadow'>
           <div className='card-header'>
