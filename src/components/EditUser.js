@@ -1,5 +1,5 @@
 import React from 'react'
-import API_URL from './constants/constants'
+import API_URL from '../constants/constants'
 
 class EditUser extends React.Component {
   state = {

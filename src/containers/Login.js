@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import LoginAlert from '../components/LoginAlert'
 import LoggedInHOC from '../HOC/LoggedInHOC'
-import API_URL from './constants/constants'
+import API_URL from '../constants/constants'
 
 class Login extends PureComponent {
   state = {
