@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import API_URL from './constants/constants'
+import API_URL from '../constants/constants'
 
 class MessageForm extends PureComponent {
   state = {
