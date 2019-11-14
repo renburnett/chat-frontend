@@ -13,7 +13,7 @@ class ChatWindow extends PureComponent {
 
   render () {
     return (
-      <div className='col-9 chat-window card shadow mt-3'>
+      <div className='col-9 main-chat-view card shadow mt-3'>
         <div className='card-body overflow-auto'>
           {this.displayConversationMessages()}
         </div>

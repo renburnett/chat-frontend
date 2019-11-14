@@ -2,11 +2,7 @@
   text-align: center;
 }
 
-.navbar {
-  background: aquamarine;
-}
-
-.chat-window {
+.main-chat-view {
   height: 88vh;
 }
 
@@ -15,12 +11,20 @@
   padding-left: 0px;
 }
 
-.form-submit-btn {
-  width: 20%;
-}
-
 .message-body {
   font-size: 1.4rem;
+}
+
+.selected-topic {
+  font-size: 1.6rem;
+}
+
+.topics {
+  font-size: 1.3rem;
+}
+
+.form-submit-btn {
+  width: 20%;
 }
 
 #message-input {
