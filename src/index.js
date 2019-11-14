@@ -11,7 +11,7 @@ import { ActionCableProvider } from 'react-actioncable-provider'
 import API_URL from './constants/constants'
 
 ReactDOM.render(
-  <ActionCableProvider url={`ws://${API_URL}/cable`}>
+  <ActionCableProvider url={`ws://kir-chat-app-backend.herokuapp.com/cable`}>
     <App />
   </ActionCableProvider>, document.getElementById('root')
 )
