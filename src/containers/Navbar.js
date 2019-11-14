@@ -8,10 +8,8 @@ class Navbar extends PureComponent {
     if (this.props.loggedIn) {
       return (
         <>
-          <NavLink to='/user'>
+          <NavLink to='/edituser'>
             <div className='nav-item nav-link active' 
-            onClick={this.props.handleEditUser} 
-            handleUpdatingUser={this.props.handleUpdatingUser}
             >Edit Profile</div>
           </NavLink>
           <NavLink to='/login'>

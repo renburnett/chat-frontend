@@ -10,7 +10,6 @@ import { ActionCable } from 'react-actioncable-provider';
 import Cable from './components/Cable';
 import EditUser from './components/EditUser';
 
-
 class App extends Component {
   state = {
     users: [],
@@ -34,19 +33,6 @@ class App extends Component {
     })
     window.localStorage.removeItem('currentUser')
   }
-
-  handleEditUser = () => {
-    console.log("clicking on handleEditUser")
-    // when you click on the edit profile
-    //the entire page goes away
-    //and you are taken to a edit form
-  }
-
-  handleUpdatingUser = () => {
-    console.log("did I click on the submit button in the edit form")
-    // part two - once page can render without everything on the page, then 
-  }
-  
 
   checkForLoggedInUser = () => {
     if (window.localStorage.currentUser) {
@@ -108,6 +94,7 @@ class App extends Component {
   }
 
   render(){
+
     return (
       <div className="App" >
         {this.state.conversations.length ?
@@ -123,8 +110,6 @@ class App extends Component {
         <Router>
           <Navbar loggedIn={this.state.loggedIn} 
           handleLogout={this.logout} 
-          handleEditUser={this.handleEditUser} 
-          handleUpdatingUser={this.props.handleUpdatingUser}
           />
           <div className="container">
             <Route exact path='/login' render={props => {
@@ -136,8 +121,16 @@ class App extends Component {
                 loggedIn={this.state.loggedIn}
               />}
             }/>
+            <div className="container">
+              <Route exact path='/edituser' render={props => {
+                return <EditUser
+                {...props}
+                getUsers={this.getUsers}
+                />}
+              }/>
+            </div>
             <div className="row">
-              <Route path='/' render={props => {
+              <Route exact path='/' render={props => {
                 return <ChatWindow 
                   {...props}
                   currentConversation={this.state.currentConversation}
@@ -146,7 +139,7 @@ class App extends Component {
                   users={this.state.users}
                 />}
               }/>
-              <Route path='/' render={props => {
+              <Route exact path='/' render={props => {
                 return <Sidebar 
                   {...props}
                   loggedIn={this.state.loggedIn}
