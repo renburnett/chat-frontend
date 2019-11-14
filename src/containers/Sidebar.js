@@ -22,7 +22,7 @@ class Sidebar extends PureComponent {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'accept': 'application/json'
+        'Accept': 'application/json'
       },
       body: JSON.stringify({
         topic: topic
