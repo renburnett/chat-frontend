@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import API_URL from './constants/constants'
 
 class NewConversationForm extends PureComponent {
   state = {
@@ -25,7 +26,7 @@ class NewConversationForm extends PureComponent {
       })
     }
 
-    fetch('http://localhost:3000/conversations', config)
+    fetch(`${API_URL}/conversations`, config)
     .then(res => res.json())
     .then(newTopic => {
       if (newTopic.id) {

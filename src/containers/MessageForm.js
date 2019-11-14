@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import API_URL from './constants/constants'
 
 class MessageForm extends PureComponent {
   state = {
@@ -24,7 +25,7 @@ class MessageForm extends PureComponent {
       })
     }
 
-    fetch('http://localhost:3000/messages', config)
+    fetch(`${API_URL}/messages`, config)
     .then(res => res.json())
     .then(newMessage => {
       this.props.updateCurrentConversation(newMessage)
