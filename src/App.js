@@ -60,9 +60,13 @@ class App extends Component {
   }
 
   addNewConversation = (newTopic) => {
-    this.setState(prevState => {
-      return { conversations: [...prevState.conversations, newTopic] }
-    })  }
+    const convoCopy = this.state.conversations.find(convo => convo.id === newTopic.id)
+    if (!convoCopy) {
+      this.setState(prevState => {
+        return { conversations: [...prevState.conversations, newTopic] }
+      })
+    }
+  }
 
   addNewUser = (newUser) => {
     this.setState(prevState => {
@@ -76,12 +80,13 @@ class App extends Component {
 
   updateCurrentConversation = (newMessage) => {
     const conversations = [...this.state.conversations];
-    const conversation = conversations.find(
-      conversation => conversation.id === newMessage.conversation_id
-    );
-    conversation.messages = [...conversation.messages, newMessage];
-    this.setState({ conversations });
-  };
+    const conversation = conversations.find(conversation => conversation.id === newMessage.conversation_id)
+    const messageCopy = conversation.messages.find(message => message.id === newMessage.id)
+    if (!messageCopy) {
+      conversation.messages = [...conversation.messages, newMessage]
+      this.setState({ conversations })
+    }
+  }
 
   render(){
     return (
