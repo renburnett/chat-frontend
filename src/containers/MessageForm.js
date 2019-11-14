@@ -46,7 +46,7 @@ class MessageForm extends PureComponent {
 
   render () {
     return (
-      <form className="row message-form form-inline" onSubmit={this.handleSubmit}>
+      <form className="row message-form form-inline card-footer" onSubmit={this.handleSubmit}>
         <input 
           className="form-control"
           value={this.state.content} 

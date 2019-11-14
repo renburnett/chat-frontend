@@ -1,31 +1,53 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
+import CurrentUserMessages from './CurrentUserMessages'
+import OtherUserMessages from './OtherUserMessages'
 
-const Message = (props) => {
-  const findMessageAuthor = () => {
-    return props.users.find(user => user.id === props.message.user_id)
+class Message extends PureComponent {
+  state = {
+    user: {
+      name: ''
+    },
+    time: ''
   }
 
-  const displayTime = () => {
-    return new Date(props.message.created_at).toLocaleString()
+  componentDidMount () {
+    this.findMessageAuthor()
+    this.findMessageTime()
   }
 
-  const findCurrentUser = () => {
+  findMessageAuthor = () => {
+    const user = this.props.users.find(user => user.id === this.props.message.user_id)
+    this.setState({
+      user: user
+    })
+  }
+
+  findMessageTime = () => {
+    const time = new Date(this.props.message.created_at).toLocaleString()
+    this.setState({
+      time: time
+    })
+  }
+
+  findCurrentUser = () => {
     return JSON.parse(window.localStorage.getItem('currentUser'))
   }
 
-  const displayBasedOnUser = () => {
-    if (findCurrentUser().id === findMessageAuthor().id) {
-      return 'card bg-primary text-light text-right p-2 shadow-sm'
+  displayBasedOnUser = () => {
+    if (this.findCurrentUser().id === this.state.user.id) {
+      return <CurrentUserMessages name={this.state.user.name} content={this.props.message.content} time={this.state.time} />
     } else {
-      return 'card bg-secondary text-light text-left p-2 shadow-sm'
+      return <OtherUserMessages name={this.state.user.name} content={this.props.message.content} time={this.state.time} />
     }
   }
 
-  return (
-    <div className={displayBasedOnUser()}>
-      {findMessageAuthor().name}: {props.message.content} @ {displayTime()}
-    </div>
-  )
+  render () {
+    return (
+      <>
+      {this.displayBasedOnUser()}
+      </>
+    )
+  }
 }
 
 export default Message
