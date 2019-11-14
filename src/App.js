@@ -8,6 +8,7 @@ import Login from './containers/Login'
 import ChatWindow from './containers/ChatWindow'
 import { ActionCable } from 'react-actioncable-provider';
 import Cable from './components/Cable';
+import EditUser from './components/EditUser';
 
 class App extends Component {
   state = {
@@ -89,6 +90,7 @@ class App extends Component {
   }
 
   render(){
+
     return (
       <div className="App" >
         {this.state.conversations.length ?
@@ -102,7 +104,9 @@ class App extends Component {
           onReceived={(res) => this.addNewConversation(res.conversation)}
         />
         <Router>
-          <Navbar loggedIn={this.state.loggedIn} handleLogout={this.logout} />
+          <Navbar loggedIn={this.state.loggedIn} 
+          handleLogout={this.logout} 
+          />
           <div className="container">
             <Route exact path='/login' render={props => {
               return <Login 
@@ -113,8 +117,16 @@ class App extends Component {
                 loggedIn={this.state.loggedIn}
               />}
             }/>
+            <div className="container">
+              <Route exact path='/edituser' render={props => {
+                return <EditUser
+                {...props}
+                getUsers={this.getUsers}
+                />}
+              }/>
+            </div>
             <div className="row">
-              <Route path='/' render={props => {
+              <Route exact path='/' render={props => {
                 return <ChatWindow 
                   {...props}
                   currentConversation={this.state.currentConversation}
@@ -123,7 +135,7 @@ class App extends Component {
                   users={this.state.users}
                 />}
               }/>
-              <Route path='/' render={props => {
+              <Route exact path='/' render={props => {
                 return <Sidebar 
                   {...props}
                   loggedIn={this.state.loggedIn}

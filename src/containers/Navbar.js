@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import { NavLink } from 'react-router-dom'
+import EditUser from '../components/EditUser'
 
 class Navbar extends PureComponent {
 
@@ -7,8 +8,9 @@ class Navbar extends PureComponent {
     if (this.props.loggedIn) {
       return (
         <>
-          <NavLink to='/user'>
-            <div className='nav-item nav-link active'>Edit Profile</div>
+          <NavLink to='/edituser'>
+            <div className='nav-item nav-link active' 
+            >Edit Profile</div>
           </NavLink>
           <NavLink to='/login'>
             <div className='nav-item nav-link active' onClick={this.props.handleLogout}>Logout</div>
