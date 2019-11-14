@@ -3,13 +3,15 @@ import React from 'react'
 const ConversationTopics = (props) => {
   const showActiveConvo = () => {
     if (props.convo.topic === props.currentConversation.topic) {
-      return 'text-primary'
+      return 'selected-topic text-primary'
+    } else {
+      return 'topics'
     }
   }
 
   return (
     <div className={showActiveConvo()}>
-      {props.convo.topic}
+      <strong>{props.convo.topic}</strong>
     </div>
   )
 }

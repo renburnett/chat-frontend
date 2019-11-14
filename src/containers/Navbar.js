@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import { NavLink } from 'react-router-dom'
-import EditUser from '../components/EditUser'
 
 class Navbar extends PureComponent {
 

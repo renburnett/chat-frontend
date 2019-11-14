@@ -2,19 +2,8 @@
   text-align: center;
 }
 
-.navbar {
-  background: aquamarine;
-}
-
-.chat-window {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100vh;
-}
-
-.sidebar {
-  height: 100vh;
+.main-chat-view {
+  height: 88vh;
 }
 
 .col-sm-3 {
@@ -22,9 +11,16 @@
   padding-left: 0px;
 }
 
-.message-form {
-  flex-direction: row;
-  justify-content: space-between;
+.message-body {
+  font-size: 1.4rem;
+}
+
+.selected-topic {
+  font-size: 1.6rem;
+}
+
+.topics {
+  font-size: 1.3rem;
 }
 
 .form-submit-btn {
